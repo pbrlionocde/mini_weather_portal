@@ -1,0 +1,55 @@
+{% extends "main_layout.html" %}
+{% block content %}
+<form class="form-select-city" method="post" action="{{url_for('city')}}">
+  <select name='l' class="js-data-example-ajax">
+
+  </select>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Enter</button>
+</form>
+
+<script>
+$(document).ready(function() {
+  var data = {{data|tojson}}
+  $(".js-data-example-ajax").select2({
+    minimumInputLength:2,
+    data: data
+  });
+ });
+  </script>
+
+  {% if weather %}
+     <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Country</th>
+      <th scope="col">City</th>
+      <th scope="col">Visibility</th>
+      <th scope="col">Wind</th>
+      <th scope="col">Temperature</th>
+      <th scope="col">Clouds</th>
+      <th scope="col">Pressure</th>
+      <th scope="col">Humidity</th>
+      <th scope="col">Date</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{{weather['sys']['country']}}</td>
+      <td>{{weather['name']}}</td>
+      <td>{{weather['visibility']}} m</td>
+      <td>{{weather['wind']['speed']}} m/s</td>
+      <td>{{temp}}C</td>
+      <td>{{weather['weather'][0]['main']}}</td>
+      <td>{{weather['main']['pressure']}} hPa</td>
+      <td>{{weather['main']['humidity']}}%</td>
+      <td>{{date}}</td>
+    </tr>
+  </tbody>
+</table>
+  {% endif %}
+
+
+{% endblock %}
