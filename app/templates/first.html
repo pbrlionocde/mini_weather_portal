@@ -1,8 +1,7 @@
 {% extends "main_layout.html" %}
 {% block content %}
-<form class="form-select-city" method="post" action="{{url_for('city')}}">
+<form method="post" action="{{url_for('city')}}">
   <select name='l' class="js-data-example-ajax">
-
   </select>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Enter</button>
 </form>

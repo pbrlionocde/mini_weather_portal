@@ -1,0 +1,93 @@
+{% extends "main_layout.html" %}
+{% block content %}
+
+<form method="post" action="{{url_for('all_weather_filter')}}">
+  <p>Select city
+    <select name='city'>
+      <option selected>All</option>
+      {% for el in city %}
+        <option value={{el}}>{{el}}</option>
+      {% endfor %}
+    </select>
+    Select date to
+    <select name=year_from>
+      <option selected>year</option>
+      {% for el in range(2000, 2025) %}
+        <option value={{el}}>{{el}}</option>
+      {% endfor %}
+    </select >
+    <select name="month_from">
+      <option selected>month</option>
+      {% for el in range(1, 13) %}
+        <option value={{el}}>{{el}}</option>
+      {% endfor %}
+    </select>
+    <select name=day_from>
+      <option selected>day</option>
+      {% for el in range(1, 32) %}
+        <option value={{el}}>{{el}}</option>
+      {% endfor %}
+    </select>
+    Select date from
+    <select name=year_to>
+      <option selected>year</option>
+      {% for el in range(2000, 2025) %}
+        <option value={{el}}>{{el}}</option>
+      {% endfor %}
+    </select >
+    <select name="month_to">
+      <option selected>month</option>
+      {% for el in range(1, 13) %}
+        <option value={{el}}>{{el}}</option>
+      {% endfor %}
+    </select>
+    <select name=day_to>
+      <option selected>day</option>
+      {% for el in range(1, 32) %}
+        <option value={{el}}>{{el}}</option>
+      {% endfor %}
+    </select>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Filters</button>
+  </p>
+</form>
+
+
+{% if weather %}
+<table class="table">
+<thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Country</th>
+    <th scope="col">City</th>
+    <th scope="col">Visibility</th>
+    <th scope="col">Wind</th>
+    <th scope="col">Temperature</th>
+    <th scope="col">Clouds</th>
+    <th scope="col">Pressure</th>
+    <th scope="col">Humidity</th>
+    <th scope="col">Date</th>
+
+  </tr>
+</thead>
+<tbody>
+  {% for el in weather %}
+    <tr>
+      <th scope="row">-</th>
+      <td>{{el[1]}}</td>
+      <td>{{el[2]}}</td>
+      <td>{{el[3]}} m</td>
+      <td>{{el[4]}} m/s</td>
+      <td>{{el[5]}}C</td>
+      <td>{{el[6]}}</td>
+      <td>{{el[7]}} hPa</td>
+      <td>{{el[8]}}%</td>
+      <td>{{el[9]}}</td>
+    </tr>
+  {% endfor %}
+</tbody>
+</table>
+{% endif %}
+
+
+{% endblock %}
